@@ -102,5 +102,13 @@ RSpec.describe StringCalculator do
         expect(subject).to eq(/;/)
       end
     end
+
+    context 'when numbers string contains a custom delimiter of any length' do
+      let(:numbers_str) { "//[***]\n1***2***3" }
+
+      it 'returns the custom delimiter as a regex expression' do
+        expect(subject).to eq(/\*\*\*/)
+      end
+    end
   end
 end
