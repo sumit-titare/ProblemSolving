@@ -7,8 +7,12 @@ class StringCalculator
 
     delimiter = parse_delimiter(numbers)
     numbers = parse_number_string(numbers)
+    parsed_numbers = numbers.split(delimiter).map(&:to_i)
 
-    numbers.split(delimiter).map(&:to_i).sum
+    negative_numbers = parsed_numbers.select(&:negative?)
+    raise ArgumentError, "negative numbers not allowed #{negative_numbers.join(', ')}" unless negative_numbers.empty?
+
+    parsed_numbers.sum
   end
 
   def self.parse_number_string(numbers_str)
