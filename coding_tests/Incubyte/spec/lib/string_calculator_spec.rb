@@ -38,5 +38,13 @@ RSpec.describe StringCalculator do
         expect(subject).to eq 6
       end
     end
+
+    context 'when input numbers contain a custom delimiter' do
+      let(:numbers) { "//;\n1;2" }
+
+      it 'supports custom delimiter and returns the sum of all numbers' do
+        expect(subject).to eq 3
+      end
+    end
   end
 end
