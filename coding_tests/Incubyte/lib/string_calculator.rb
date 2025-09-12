@@ -25,6 +25,12 @@ class StringCalculator
     default_delimiter = /,|\n/
     return default_delimiter unless numbers_str.start_with?('//')
 
-    Regexp.new(Regexp.escape(numbers_str[2]))
+    delimiter_str = numbers_str.split("\n", 2).first[2..]
+
+    if delimiter_str.start_with?('[') && delimiter_str.end_with?(']')
+      Regexp.new(Regexp.escape(delimiter_str[1..-2])) # gets from 1st index to 2nd last index
+    else
+      Regexp.new(Regexp.escape(delimiter_str))
+    end
   end
 end
