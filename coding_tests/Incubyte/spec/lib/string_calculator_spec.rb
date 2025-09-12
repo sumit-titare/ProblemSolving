@@ -47,4 +47,44 @@ RSpec.describe StringCalculator do
       end
     end
   end
+
+  describe '.parse_number_string' do
+    subject { described_class.parse_number_string(numbers_str) }
+
+    context 'when numbers do not contain a custom delimiter' do
+      let(:numbers_str) { '1,2,3' }
+
+      it 'returns the input string as is' do
+        expect(subject).to eq '1,2,3'
+      end
+    end
+
+    context 'when numbers contain a custom delimiter' do
+      let(:numbers_str) { "//;\n1;2" }
+
+      it 'returns the input string without the delimiter declaration' do
+        expect(subject).to eq '1;2'
+      end
+    end
+  end
+
+  describe '.parse_delimiter' do
+    subject { described_class.parse_delimiter(numbers_str) }
+
+    context 'when the numbers string does not contains a custom delimiter' do
+      let(:numbers_str) { '1,2,3' }
+
+      it 'returns the default delimiter' do
+        expect(subject).to eq(/,|\n/)
+      end
+    end
+
+    context 'when numbers string contains a custom delimiter' do
+      let(:numbers_str) { "//;\n1;2" }
+
+      it 'returns the custom delimiter as a regex expression' do
+        expect(subject).to eq(/;/)
+      end
+    end
+  end
 end
