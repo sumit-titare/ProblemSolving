@@ -54,6 +54,14 @@ RSpec.describe StringCalculator do
         expect { subject }.to raise_error(ArgumentError, 'negative numbers not allowed -2, -3')
       end
     end
+
+    context 'when input numbers contain numbers greater than 1000' do
+      let(:numbers) { '2,1001' }
+
+      it 'ignores numbers greater than 1000 and returns the sum for the rest of the numbers' do
+        expect(subject).to eq 2
+      end
+    end
   end
 
   describe '.parse_number_string' do
