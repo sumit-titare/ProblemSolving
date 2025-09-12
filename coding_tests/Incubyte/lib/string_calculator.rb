@@ -12,7 +12,7 @@ class StringCalculator
     negative_numbers = parsed_numbers.select(&:negative?)
     raise ArgumentError, "negative numbers not allowed #{negative_numbers.join(', ')}" unless negative_numbers.empty?
 
-    parsed_numbers.sum
+    parsed_numbers.sum { |num| num > 1000 ? 0 : num }
   end
 
   def self.parse_number_string(numbers_str)
