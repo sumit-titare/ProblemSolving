@@ -11,7 +11,7 @@ RSpec.describe StringCalculator do
       let(:numbers) { '' }
 
       it 'returns 0' do
-        expect(subject).to eq(0)
+        expect(subject).to eq 0
       end
     end
 
@@ -27,7 +27,15 @@ RSpec.describe StringCalculator do
       let(:numbers) { '1,2,3' }
 
       it 'returns the sum of all the numbers' do
-        expect(subject).to eq(6)
+        expect(subject).to eq 6
+      end
+    end
+
+    context 'when numbers contain new line between numbers' do
+      let(:numbers) { "1\n2,3" }
+
+      it 'returns the sum of all numbers' do
+        expect(subject).to eq 6
       end
     end
   end
