@@ -62,6 +62,14 @@ RSpec.describe StringCalculator do
         expect(subject).to eq 2
       end
     end
+
+    context 'when input string contains a delimiter as *' do
+      let(:numbers) { "//*\n1*3*4" }
+
+      it "returns the product of numbers" do
+        expect(subject).to eq 12
+      end
+    end
   end
 
   describe '.parse_number_string' do
